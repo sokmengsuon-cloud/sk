@@ -206,6 +206,42 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(255,140,110,.2
 .total span:last-child{color:#FFE6C2;text-shadow:0 0 10px rgba(255,175,100,.9),0 0 24px rgba(255,90,110,.6);animation:glowt 2.8s ease-in-out infinite}
 @keyframes glowt{50%{text-shadow:0 0 14px rgba(255,205,135,1),0 0 34px rgba(255,90,110,.9)}}
 .info a{text-shadow:0 0 12px rgba(255,150,100,.5)}
+/* ===== performance: lighter effects ===== */
+body::before,body::after{animation:none;filter:none;-webkit-mask:radial-gradient(closest-side,transparent 55%,#000 68%,#000 72%,transparent 88%);mask:radial-gradient(closest-side,transparent 55%,#000 68%,#000 72%,transparent 88%)}
+html::after{display:none}
+.glass{-webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);box-shadow:var(--rim),0 8px 20px rgba(0,0,0,.35)}
+.item{-webkit-backdrop-filter:none;backdrop-filter:none;background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.02) 50%,rgba(0,0,0,.12)),rgba(30,13,38,.78)}
+.item.sel{box-shadow:var(--rim),0 0 0 1px rgba(255,140,110,.55),0 8px 22px rgba(255,70,90,.25)}
+.item::after{display:none}
+#sheet{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(8,3,12,.72)}
+#bar button{-webkit-backdrop-filter:none;backdrop-filter:none}
+h1{animation:none;filter:none;background-size:100% 100%}
+.th img{animation:none;filter:none}
+.item .pr{animation:none}
+.total span:last-child{animation:none}
+.qb{animation:none}
+.hi,.go svg{animation:none}
+#bar button,#bar.on button{animation:none}
+#bar.on button{animation:slideup .5s cubic-bezier(.2,.9,.3,1) both}
+#bar.bump button{animation:bump .35s cubic-bezier(.3,1.6,.5,1)}
+#bar button::after,.go::after{display:none}
+.tabs button[aria-selected="true"] .ti{filter:none;animation:tabpop .6s cubic-bezier(.3,1.7,.5,1)}
+.tabs button[aria-selected="true"] .ti .bb,.tabs button[aria-selected="true"] .ti .fr,.tabs button[aria-selected="true"] .ti .st{animation:none}
+@keyframes cardin{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes dropin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+@keyframes dropsheet{from{transform:translateY(-70px) scale(.95);opacity:0}to{transform:none;opacity:1}}
+@keyframes sheetin{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+/* ===== order sent screen ===== */
+.panel #done{display:none;text-align:center;padding:10px 4px 6px}
+.panel.sent>*:not(#done){display:none}
+.panel.sent #done{display:block}
+#done .ok{width:84px;height:84px;margin:6px auto 14px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:var(--cta);box-shadow:inset 1px 1px 0 rgba(255,255,255,.55),0 10px 30px rgba(255,60,100,.5);animation:okpop .6s cubic-bezier(.3,1.7,.5,1)}
+#done .ok svg{width:44px;height:44px}
+@keyframes okpop{from{transform:scale(.2) rotate(-30deg);opacity:0}}
+#done h3{font-size:24px}
+#done .cd{display:inline-block;margin:10px 0 6px;padding:6px 22px;border-radius:999px;font-weight:900;font-size:26px;letter-spacing:.08em;color:#FFE6C2;background:rgba(255,178,122,.14);border:1px solid rgba(255,195,145,.5);text-shadow:0 0 10px rgba(255,175,100,.8)}
+#done p{color:var(--mute);margin:6px 0}
+.go:disabled{opacity:.7;cursor:progress}
 </style>
 </head>
 <body>
@@ -237,9 +273,11 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(255,140,110,.2
     <select id="ad"><option value="">ជ្រើសរើសតុលេខ</option><option>តុលេខ១</option><option>តុលេខ២</option><option>តុលេខ៣</option><option>តុលេខ៤</option><option>តុលេខ៥</option><option>តុលេខ៦</option><option>តុលេខ៧</option><option>តុលេខ៨</option><option>តុលេខ៩</option><option>តុលេខ១០</option></select>
     <label class="lb" for="nt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4zM8 9h8M8 12h5"/></svg>កំណត់ចំណាំ (បើមាន)</label>
     <textarea id="nt" rows="2"></textarea>
-    <button class="go" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3L2 11l7 2.5L11.5 21l3-5 5 4zM9 13.5L22 3"/></svg>ផ្ញើការកម្មង់ទៅ Telegram</button>
-    <p class="note">ប៊ូតុងនេះនឹងចម្លងការកម្មង់ ហើយបើក Telegram។ សូមចុចសង្កត់ក្នុងប្រអប់សារ រួចជ្រើស “Paste” ហើយចុចផ្ញើ។</p>
+    <button class="go" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3L2 11l7 2.5L11.5 21l3-5 5 4zM9 13.5L22 3"/></svg><span id="sendtxt">ផ្ញើការកម្មង់ទៅ Telegram</span></button>
+    <button class="ghost" id="send2" hidden>ផ្ញើតាម Telegram (ចម្លង រួច Paste)</button>
+    <p class="note" id="nn">ប៊ូតុងនេះនឹងចម្លងការកម្មង់ ហើយបើក Telegram។ សូមចុចសង្កត់ក្នុងប្រអប់សារ រួចជ្រើស “Paste” ហើយចុចផ្ញើ។</p>
     
+<div id="done"><div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>ផ្ញើការកម្មង់រួចរាល់!</h3><div class="cd" id="code"></div><p>បុគ្គលិកបានទទួលការកម្មង់របស់អ្នកហើយ។ សូមរង់ចាំបន្តិច។</p><button class="go" id="again">រួចរាល់</button></div>
   </div>
 </div>
 <div id="toast" class="glass" role="status"></div>
@@ -314,7 +352,7 @@ function bar(bump){
   $("bar").className=(t.c?"on":"")+(bump&&t.c?" bump":"");
   $("cnt").textContent="មើលការកម្មង់ ("+t.c+")";
   $("sum").textContent=money(t.s);
-  if(!t.c)$("sheet").className="";
+  if(!t.c)$("sheet").className="";save();
 }
 function lines(){
   $("lines").innerHTML=ITEMS.filter(function(i){return cart[i.id]}).map(function(i){
@@ -352,22 +390,64 @@ $("close").onclick=function(){$("sheet").className=""};
 $("clear").onclick=function(){cart={};list();bar();lines()};
 $("ad").onchange=function(){this.style.borderColor=""};
 $("sheet").onclick=function(e){if(e.target===$("sheet"))$("sheet").className=""};
-$("send").onclick=function(){
-  if(!$("ad").value){$("ad").style.borderColor="#FF6B8A";$("ad").focus();toast("សូមជ្រើសរើសតុលេខមុនពេលផ្ញើ");return}
-  
-  var msg=message();
-  var url="https://t.me/"+TG+"?text="+encodeURIComponent(msg);
+var ORDER_API="https://rapid-cloud-a1bbsk-orders.sokmeng-suon.workers.dev";/* ដាក់ URL របស់ Cloudflare Worker ត្រង់នេះ ដើម្បីផ្ញើការកម្មង់ដោយស្វ័យប្រវត្តិ (មើល worker.js) */
+var sending=false,isSent=false,PN=document.querySelector(".panel");
+function sendManual(){
+  var msg=message(),url="https://t.me/"+TG+"?text="+encodeURIComponent(msg);
   copy(msg).then(function(){toast("បានចម្លងការកម្មង់ហើយ។ សូម Paste ក្នុង Telegram រួចចុចផ្ញើ។")},function(){toast("សូមចម្លងសារដោយខ្លួនឯង រួចផ្ញើក្នុង Telegram")});
   window.open(url,"_blank");
+}
+function showDone(code){
+  $("code").textContent="#"+code;PN.classList.add("sent");isSent=true;
+  cart={};$("nt").value="";save();list();
+}
+function closeSheet(){
+  $("sheet").className="";
+  if(isSent){isSent=false;PN.classList.remove("sent");bar();lines()}
+}
+$("close").onclick=closeSheet;$("again").onclick=closeSheet;
+$("sheet").onclick=function(e){if(e.target===$("sheet"))closeSheet()};
+$("send2").onclick=sendManual;
+$("send").onclick=function(){
+  if(!$("ad").value){$("ad").style.borderColor="#FF6B8A";$("ad").focus();toast("សូមជ្រើសរើសតុលេខមុនពេលផ្ញើ");return}
+  if(!total().c)return;
+  if(!ORDER_API){sendManual();return}
+  if(sending)return;
+  sending=true;
+  var b=$("send"),t=$("sendtxt"),old=t.textContent;
+  b.disabled=true;t.textContent="កំពុងផ្ញើ…";$("send2").hidden=true;
+  var ctl=new AbortController(),to=setTimeout(function(){ctl.abort()},12000);
+  fetch(ORDER_API,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify({table:$("ad").value,message:message()}),signal:ctl.signal})
+    .then(function(r){return r.json().then(function(j){if(!r.ok||!j.ok)throw 0;return j})})
+    .then(function(j){showDone(j.code||"")})
+    .catch(function(){toast("ផ្ញើមិនបានទេ សូមព្យាយាមម្តងទៀត ឬផ្ញើតាម Telegram");$("send2").hidden=false})
+    .then(function(){clearTimeout(to);sending=false;b.disabled=false;t.textContent=old});
 };
+if(ORDER_API){$("sendtxt").textContent="ផ្ញើការកម្មង់";$("nn").textContent="ការកម្មង់នឹងត្រូវផ្ញើទៅបុគ្គលិកភ្លាមៗ។"}
+/* រក្សាទុកការកម្មង់ក្នុងកម្មវិធីរុករក (localStorage) — ផុតកំណត់ក្រោយ ១២ ម៉ោង */
+var KEY="sk_order_v1",TTL=12*3600*1000;
+function save(){try{localStorage.setItem(KEY,JSON.stringify({t:Date.now(),cart:cart,ad:$("ad").value,nt:$("nt").value,cur:cur}))}catch(e){}}
+function load(){
+  try{
+    var d=JSON.parse(localStorage.getItem(KEY)||"null");
+    if(!d||Date.now()-d.t>TTL){localStorage.removeItem(KEY);return 0}
+    ITEMS.forEach(function(i){var q=parseInt(d.cart&&d.cart[i.id],10);if(q>0&&q<100)cart[i.id]=q});
+    if(CATS.some(function(c){return c.id===d.cur}))cur=d.cur;
+    if(d.ad){$("ad").value=d.ad;if($("ad").value!==d.ad)$("ad").value=""}
+    $("nt").value=String(d.nt||"").slice(0,500);
+    return total().c;
+  }catch(e){return 0}
+}
+$("ad").addEventListener("change",save);
+$("nt").addEventListener("input",save);
+addEventListener("pagehide",save);
+document.addEventListener("visibilitychange",function(){if(document.hidden)save()});
+var restored=load();
 tabs();list(true);bar();
+if(restored)toast("បានស្តារការកម្មង់ពីមុនមកវិញ");
 (function(){
 var R=matchMedia("(prefers-reduced-motion:reduce)").matches,root=document.documentElement,from=null;
-addEventListener("pointermove",function(e){
-  root.style.setProperty("--px",e.clientX+"px");root.style.setProperty("--py",e.clientY+"px");
-  var it=e.target.closest&&e.target.closest(".item");
-  if(it){var r=it.getBoundingClientRect();it.style.setProperty("--mx",(e.clientX-r.left)+"px");it.style.setProperty("--my",(e.clientY-r.top)+"px")}
-},{passive:true});
+
 document.addEventListener("click",function(e){
   var b=e.target.closest&&e.target.closest("button[data-a]");
   from=b?{id:b.dataset.a,r:b.getBoundingClientRect()}:null;
